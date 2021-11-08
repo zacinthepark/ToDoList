@@ -29,6 +29,7 @@ class ToDoCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     @IBAction func completeButtonTapped(_ sender: UIButton) {
         delegate?.checkMarkTapped(sender: self)
     }
