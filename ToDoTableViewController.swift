@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController, ToDoCellDelgate {
     
     var todos = [ToDo]()
     
@@ -34,10 +34,15 @@ class ToDoTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath)
-        let todo = todos[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as? ToDoCell else {
+            fatalError("Could not dequeue a cell")
+        }
         
-        cell.textLabel?.text = todo.title
+        cell.delegate = self
+        
+        let todo = todos[indexPath.row]
+        cell.titleLabel?.text = todo.title
+        cell.isCompleteButton.isSelected = todo.isComplete
 
         return cell
     }
@@ -104,6 +109,15 @@ class ToDoTableViewController: UITableViewController {
             let indexPath = tableView.indexPathForSelectedRow!
             let selectedToDo = todos[indexPath.row]
             addToDoViewController.todo = selectedToDo
+        }
+    }
+    
+    func checkMarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete = !todo.isComplete
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
     
