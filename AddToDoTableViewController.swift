@@ -17,11 +17,21 @@ class AddToDoTableViewController: UITableViewController {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    var todo: ToDo?
     var isPickerHidden = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dueDatePicker.date = Date().addingTimeInterval(24*60*60)
+        
+        if let todo = todo {
+            navigationItem.title = "To-Do"
+            titleTextField.text = todo.title
+            isCompleteButton.isSelected = todo.isComplete
+            dueDatePicker.date = todo.dueDate
+            notesTextView.text = todo.notes
+        } else {
+            dueDatePicker.date = Date().addingTimeInterval(24*60*60)
+        }
         updateSaveButtonState()
         updateDueDateLabel(date: dueDatePicker.date)
     }
@@ -54,6 +64,18 @@ class AddToDoTableViewController: UITableViewController {
         default: break
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard segue.identifier == "saveUnwind" else {return}
+        
+        let title = titleTextField.text!
+        let isComplete = isCompleteButton.isSelected
+        let dueDate = dueDatePicker.date
+        let notes = notesTextView.text
+        
+        todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+    }
 
 }
 
@@ -67,6 +89,7 @@ extension AddToDoTableViewController {
     func updateDueDateLabel(date: Date) {
         dueDateLabel.text = ToDo.dueDateFormatter.string(from: date)
     }
+    
 }
 
 extension AddToDoTableViewController {
