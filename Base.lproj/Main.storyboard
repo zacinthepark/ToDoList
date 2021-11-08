@@ -23,6 +23,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lSx-vr-OdF" kind="show" identifier="showDetails" id="m3h-Pg-Hsg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,7 +50,7 @@
             <objects>
                 <tableViewController id="lSx-vr-OdF" customClass="AddToDoTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="PQp-c0-X4c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -201,6 +204,7 @@
         <scene sceneID="PwW-h4-mIc">
             <objects>
                 <navigationController id="rkb-ga-Qli" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Yla-Fg-q6y"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xBe-eh-PQF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -211,7 +215,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ft-xy-7aE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="837"/>
+            <point key="canvasLocation" x="1845" y="1084"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fcd-aa-TKf">
@@ -230,6 +234,9 @@
             <point key="canvasLocation" x="132" y="838"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="m3h-Pg-Hsg"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Checked" width="44" height="44"/>
         <image name="Unchecked" width="44" height="44"/>
