@@ -66,11 +66,16 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelgate {
         }
     }
     
+    //ToDoCell이 checkMark가 Tapped됐어라고 delegate(해당 vc)에 신호를 줌 -> Delegate가 이 작업을 수행
     func checkMarkTapped(sender: ToDoCell) {
         if let indexPath = tableView.indexPath(for: sender) {
+            //신호를 보낸 셀의 indextPath의 todo instance를 가져옴
             var todo = todos[indexPath.row]
+            //해당 todo instance의 isComplete을 바꿔줌
             todo.isComplete = !todo.isComplete
+            //기존의 todos에서 해당 셀의 todo instance를 바꿔준 모델로 갈아끼움
             todos[indexPath.row] = todo
+            //바꿔준 모델을 셀에서 보이도록 reloadRows
             tableView.reloadRows(at: [indexPath], with: .automatic)
             ToDo.saveToDos(todos)
         }

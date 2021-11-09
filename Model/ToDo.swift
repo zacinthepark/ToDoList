@@ -17,14 +17,18 @@ struct ToDo: Codable {
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
     
     static func loadToDos() -> [ToDo]? {
+        //File -> Data
         guard let codedToDos = try? Data(contentsOf: ArchiveURL) else {return nil}
         let propertyListDecoder = PropertyListDecoder()
+        //Data -> ToDo
         return try? propertyListDecoder.decode(Array<ToDo>.self, from: codedToDos)
     }
     
     static func saveToDos(_ todos: [ToDo]) {
         let propertyListEncoder = PropertyListEncoder()
+        //ToDo -> Data
         let codedToDos = try? propertyListEncoder.encode(todos)
+        //Data -> File
         try? codedToDos?.write(to: ArchiveURL, options: .noFileProtection)
     }
     

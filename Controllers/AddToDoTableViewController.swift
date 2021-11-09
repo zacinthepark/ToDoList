@@ -53,6 +53,7 @@ class AddToDoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath) {
         case [1,0]:
+            //isPickerHidden이 바뀌면서 heightForRowAt에서 적용되는 것이 CGFloat(44) <--> CGFloat(200)으로 서로 왔다갔다함
             isPickerHidden = !isPickerHidden
             
             dueDateLabel.textColor =
